@@ -2,3 +2,6 @@ streamlit
 pandas
 numpy
 pytest
+streamlit==1.41.1
+pandas==2.2.3
+pytest==8.3.4
