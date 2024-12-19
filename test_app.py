@@ -1,9 +1,7 @@
 import pytest
 import pandas as pd
 from io import StringIO
-import app  # Импортируем ваше приложение, например app.py
-
-# Пример данных (создаём небольшой CSV для тестов)
+import app
 csv_data = """PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Fare,Embarked
 1,0,3,John Doe,male,22,1,0,7.25,S
 2,1,1,Jane Doe,female,38,1,0,71.28,C
@@ -21,15 +19,15 @@ def test_load_data(test_data):
     # Переопределим функцию load_data для теста
     app.load_data = lambda: test_data
     data = app.load_data()
-    assert len(data) == 4  # Убедитесь, что данные загружены корректно
-    assert 'Survived' in data.columns  # Проверка, что в данных есть столбец 'Survived'
+    assert len(data) == 4  
+    assert 'Survived' in data.columns  
 
 # Тестирование фильтрации по полу и статусу выживания
 def test_age_range(test_data):
     filtered_data = test_data[(test_data['Sex'] == 'male') & (test_data['Survived'] == 1)]
-    assert len(filtered_data) == 1  # Должен быть 1 выживший мужчина
-    assert filtered_data['Age'].min() == 26  # Минимальный возраст 26
-    assert filtered_data['Age'].max() == 26  # Максимальный возраст 26
+    assert len(filtered_data) == 1 
+    assert filtered_data['Age'].min() == 26  
+    assert filtered_data['Age'].max() == 26  
 
 # Тестирование подсчёта спасенных и погибших по пункту посадки
 def test_survival_by_embarked(test_data):
