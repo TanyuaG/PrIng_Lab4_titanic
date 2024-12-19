@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-# Загрузка данных
-@st.cache
+# Загрузка данных с использованием нового кэширования
+@st.cache_data
 def load_data():
     return pd.read_csv('data.csv')
 
@@ -65,4 +65,3 @@ elif task == "Средний возраст по классу обслужива
     pclass = st.selectbox("Выберите класс обслуживания", options=data['Pclass'].unique())
     average_age = data[data['Pclass'] == pclass]['Age'].mean()
     st.write(f"Средний возраст пассажиров в классе {pclass}: {average_age:.2f}")
-
